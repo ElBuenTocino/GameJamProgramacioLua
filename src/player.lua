@@ -8,7 +8,7 @@ function Player:new()
   self.scale = Vector(0.1, 0.1)
   self.XFor = 0
   self.YFor = 0
-  self.points = 0
+  self.points = 1
 end
 
 function Player:update(dt)
@@ -32,12 +32,12 @@ function Player:update(dt)
     self.YFor = -1
   end
 
-  if (isInLight()) then
-    damageLight(self, dt)
+  if (Player.isInLight(self)) then
+    Player.damageLight(self, dt)
   end
 
   if (self.points <= 0) then
-    die(self)
+    Player.die(self)
   end
 
   self.forward = Vector(self.XFor, self.YFor)
@@ -54,10 +54,10 @@ end
 
 function Player:isInLight()
   for i = 1, #actorList, 1 do
-    if (actorList[i]:is(Foco) and Vector.distance(actorList[i].position, self.position) <= 10)
+    if (actorList[i]:is(Foco) and Vector.distance(actorList[i].position, self.position) <= 10) then
       return true
-    end
     else return false
+    end
   end
 end
 
@@ -66,7 +66,12 @@ function Player:damageLight(dt)
 end
 
 function Player:die()
-
+  print("playerdie")
+  for i = 1, #actorList, 1 do
+    if (actorList[i]:is(Player)) then
+      table.remove(actorList, i)
+    end
+  end
 end
 
 return Player
