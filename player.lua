@@ -1,42 +1,29 @@
 local Actor = Actor or require "lib/actor"
 local Vector = Vector or require "lib/vector"
-local Ship = Actor:extend()
+local Player = Actor:extend()
 
-function Ship:new()
-  Ship.super.new(self, "src/textures/spaceShips_001.png", 180, 540, 100, 0, 0)
+function Player:new()
+  Player.super.new(self, "src/textures/spaceShips_001.png", 180, 540, 100, 0, 0)
 end
 
-function Ship:update(dt)
-  Ship.super.update(self, dt)
+function Player:update(dt)
+  Player.super.update(self, dt)
   -- Movement
   if (love.keyboard.isDown("a") and self.position.x > 0 + self.image:getWidth()/2) then
-    self.forward = Vector(-1, 0)
+    self.forward = Vector(-1, self.forward.y)
 
-  elseif (love.keyboard.isDown("d") and self.position.x < 360  - self.image:getWidth()/2) then
-    self.forward = Vector(1, 0)
+  elseif (love.keyboard.isDown("d") and self.position.x < 800  - self.image:getWidth()/2) then
+    self.forward = Vector(1, self.forward.y)
 
-  elseif (self.position.x < 0 + self.image:getWidth()/2 or self.position.x > 360  - self.image:getWidth()/2) then
-    self.forward = Vector(0,0)
-  end
+  elseif (love.keyboard.isDown("s")) then
+    self.forward = Vector(self.forward.x, -1)
 
-  --Launching
-  if (love.keyboard.isDown("space") and self.canShoot) then
-    local b = Bullet(self.position.x, self.position.y + 10)
-    table.insert(actorList, b)
-    self.canShoot = false
-  end
-
-  -- Cooldown
-  if (self.canShoot == false) then
-    self.timer = self.timer + dt
-    if (self.timer >= self.shootCooldown) then
-      self.timer = 0
-      self.canShoot = true
-    end
-  end  
+  elseif(love.keyboard.isDown("w")) then
+    self.forward = Vector(self.forward.x, 1)
+  end 
 end
 
-function Ship:draw()
+function Player:draw()
   local xx = self.position.x
   local ox = self.origin.x
   local yy = self.position.y
@@ -45,4 +32,4 @@ function Ship:draw()
   love.graphics.draw(self.image, xx, yy, rr, 1, 1, ox, oy)
 end
 
-return Ship
+return Player
