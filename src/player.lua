@@ -1,5 +1,6 @@
 local Actor = Actor or require "lib/actor"
 local Vector = Vector or require "lib/vector"
+local Foco = Foco or require "src/foco"
 local Player = Actor:extend()
 
 function Player:new()
@@ -7,6 +8,7 @@ function Player:new()
   self.scale = Vector(0.1, 0.1)
   self.XFor = 0
   self.YFor = 0
+  self.points = 0
 end
 
 function Player:update(dt)
@@ -30,6 +32,14 @@ function Player:update(dt)
     self.YFor = -1
   end
 
+  if (isInLight()) then
+    damageLight(self, dt)
+  end
+
+  if (self.points <= 0) then
+    die(self)
+  end
+
   self.forward = Vector(self.XFor, self.YFor)
 end
 
@@ -40,6 +50,23 @@ function Player:draw()
   local oy = self.origin.y
   local rr = self.rot
   love.graphics.draw(self.image, xx, yy, rr, self.scale.x, self.scale.y, ox, oy)
+end
+
+function Player:isInLight()
+  for i = 1, #actorList, 1 do
+    if (actorList[i]:is(Foco) and Vector.distance(actorList[i].position, self.position) <= 10)
+      return true
+    end
+    else return false
+  end
+end
+
+function Player:damageLight(dt)
+  self.points = self.points - 1 * dt
+end
+
+function Player:die()
+
 end
 
 return Player
