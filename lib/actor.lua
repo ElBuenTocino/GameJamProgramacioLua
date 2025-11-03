@@ -3,9 +3,9 @@ Object = Object or require "lib/classic"
 
 local Actor = Object:extend()
 
-function Actor:new(image,x,y,speed,fx,fy)
+function Actor:new(image,x,y,speed,fx,fy,sx,sy)
     self.position = Vector(x or 0, y or 0)
-    self.scale = Vector(1,1)
+    self.scale = Vector(sx or 1,sy or 1)
     self.forward = Vector(fx or 1,fy or 0)
     self.speed = speed or 30
     self.rot = 0
