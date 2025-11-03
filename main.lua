@@ -22,7 +22,7 @@ end
 function love.draw()
   love.graphics.print("Number astro eliminated: "..tostring(score),10,10)
   for , v in ipairs(actorList) do
-    v:draw()
+    v:draw() 
   end
 
 end
