@@ -16,10 +16,12 @@ function Enemy:update(dt)
      p = v
     end
   end
-  print(p.position)
   self.forward = (p.position - self.position)
   self.forward=self.forward:normalized()
 
+  if self:checkCollision(p) then
+    print("HAS PERDIDO")
+  end
   --Launching
 
   -- Cooldown
