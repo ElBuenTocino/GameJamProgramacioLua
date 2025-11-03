@@ -1,18 +1,18 @@
 local Vector = Vector or require "lib/vector"
 local Actor = Actor or require "lib/actor"
 local Player = Player or require "src/player"
+local Foco = Foco or require "src/foco"
 -- local Spawner = Spawner or require "src/spawner"
-local Food = Food or require "src/food"
 
 math.randomseed(os.time())
 
 actorList = {}
 
 function love.load()
+  local fo = Foco()
+  table.insert(actorList, fo)
   --local s = Player()
   --table.insert(actorList,s)
-  local f = Food()
-  table.insert(actorList,f)
 --   local sp = Spawner(true)
 --   table.insert(actorList,sp)
 end
