@@ -1,10 +1,11 @@
-Actor = Actor or require "resources/actor"
+Actor = Actor or require "lib/actor"
+Menu = Actor:extend()
 
 function Menu:new(image)
     Menu.super.new(self, image, 0, 0, 0, 0, 0)
     self.image = love.graphics.newImage(image)
-    self.startButton = {x = data.window.startButtonX, y = data.window.startButtonY, w = 100, h = 30}
-    self.exitButton  = {x = data.window.exitButtonX,  y = data.window.exitButtonY,  w = 100, h = 30}
+    self.startButton = {x = 450, y = 450, w = 100, h = 30}
+    self.exitButton  = {x = 450,  y = 500,  w = 100, h = 30}
 end
 
 function Menu:draw()
@@ -17,10 +18,10 @@ function Menu:drawButtons()
     love.graphics.rectangle("fill", self.startButton.x, self.startButton.y, self.startButton.w, self.startButton.h)
     love.graphics.rectangle("fill", self.exitButton.x,  self.exitButton.y,  self.exitButton.w,  self.exitButton.h)
     love.graphics.setColor(1,1,1,1)
-    if startButton then
-        love.graphics.print("Start", self.startButton.x + 10, self.startButton.y)
-    end
-        love.graphics.print("Exit", self.exitButton.x + 10, self.exitButton.y)
+
+    love.graphics.print("Start", self.startButton.x + 10, self.startButton.y)
+    love.graphics.print("Exit", self.exitButton.x + 10, self.exitButton.y)
+
 end
 
 function Menu:clickedStart(x, y)

@@ -9,7 +9,7 @@ function Actor:new(image,x,y,speed,fx,fy)
     self.forward = Vector(fx or 1,fy or 0)
     self.speed = speed or 30
     self.rot = 0
-    self.image = love.graphics.newImage(image or "src/textures/background.jpg")
+    self.image = love.graphics.newImage(image or "src/fondo.jpeg")
     self.origin = Vector(self.image:getWidth()/2 ,self.image:getHeight()/2)
     self.height = self.image:getHeight()
     self.width  = self.image:getWidth()
