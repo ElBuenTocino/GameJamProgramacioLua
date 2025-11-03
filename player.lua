@@ -45,4 +45,6 @@ function Ship:draw()
   love.graphics.draw(self.image, xx, yy, rr, 1, 1, ox, oy)
 end
 
+--hola
+
 return Ship
