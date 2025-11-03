@@ -43,9 +43,9 @@ function Player:update(dt)
     Player.damageLight(self, dt)
   end
 
-  if (Player.isTouchingFood(self)) then
+  if (self.isTouchingFood(self)) then
     print("touching food")
-    Player.eat()
+    Player.eat(self)
   end
 
   if (self.points <= 0) then
