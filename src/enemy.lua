@@ -5,6 +5,11 @@ local Enemy = Actor:extend()
 local p = nil
 function Enemy:new()
   Enemy.super.new(self, "src/mainVirus.png", 100, 100, 50, 0, 0)
+  self.scale = Vector(0.5, 0.5)
+  self.width = self.width * self.scale.x
+  self.height= self.height * self.scale.y
+  self.origin = Vector(self.origin.x - self.width, self.origin.y - self.height)
+
 end
 
 function Enemy:update(dt)
@@ -35,8 +40,10 @@ function Enemy:draw()
   local yy = self.position.y
   local oy = self.origin.y
   local rr = self.rot
-  love.graphics.draw(self.image, xx, yy, rr, 0.5, 0.5, ox, oy)
-   love.graphics.setColor(1,1,1)
+  love.graphics.draw(self.image, xx, yy, rr, self.scale.x, self.scale.y, ox, oy)
+  love.graphics.setColor(0,1,0)
+  love.graphics.rectangle("line", xx, yy, self.width, self.height)
+  love.graphics.setColor(1,1,1)
 end
 
 return Enemy
