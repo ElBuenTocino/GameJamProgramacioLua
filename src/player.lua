@@ -54,10 +54,10 @@ end
 
 function Player:isInLight()
   for i = 1, #actorList, 1 do
-    if (actorList[i]:is(Foco) and Vector.distance(actorList[i].position, self.position) <= 10)
+    if (actorList[i]:is(Foco) and Vector.distance(actorList[i].position, self.position) <= 10) then
       return true
-    end
     else return false
+    end 
   end
 end
 

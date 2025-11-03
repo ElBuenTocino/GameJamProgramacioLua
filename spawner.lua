@@ -20,6 +20,7 @@ function Spawner:update(dt)
     elseif _objSpawner == 2 then
         local e = Enemy()
         table.insert(actorList, e)
+    end 
     if self.loop then
       self.tActual = 0
     else
