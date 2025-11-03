@@ -9,8 +9,8 @@ math.randomseed(os.time())
 actorList = {}
 
 function love.load()
-  --local s = Player()
-  --table.insert(actorList,s)
+  local s = Player()
+  table.insert(actorList,s)
   local f = Food()
   table.insert(actorList,f)
 --   local sp = Spawner(true)

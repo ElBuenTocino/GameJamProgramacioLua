@@ -1,7 +1,9 @@
 local Actor = Actor or require "lib/actor"
 local Vector = Vector or require "lib/vector"
 local Foco = Foco or require "src/foco"
+local Food = Food or require "src/food"
 local Player = Actor:extend()
+
 
 function Player:new()
   Player.super.new(self, "src/mainVirus.png", 180, 540, 100, 0, 0)
@@ -15,6 +17,8 @@ function Player:update(dt)
   Player.super.update(self, dt)
   self.XFor = 0
   self.YFor = 0
+
+  Player.setSize(self)
 
   if (love.keyboard.isDown("a")) then
     self.XFor = -1
@@ -34,6 +38,11 @@ function Player:update(dt)
 
   if (Player.isInLight(self)) then
     Player.damageLight(self, dt)
+  end
+
+  if (Player.isTouchingFood(self)) then
+    print("touching food")
+    Player.eat()
   end
 
   if (self.points <= 0) then
@@ -59,6 +68,28 @@ function Player:isInLight()
     else return false
     end
   end
+end
+
+function Player:isTouchingFood()
+  for i = 1, #actorList, 1 do
+    if (actorList[i] ~= nil) then
+      if (actorList[i]:is(Food) and Player.super.checkCollision(self, actorList[i])) then
+        table.remove(actorList, i)
+        return true
+      else return false
+      end
+    end
+  end
+end
+
+function Player:eat()
+  self.points = self.points + 1
+end
+
+function Player:setSize()
+  self.scale = Vector(self.points/10, self.points/10)
+  -- self.scale.x = self.points/10
+  -- self.scale.y = self.points/10
 end
 
 function Player:damageLight(dt)
