@@ -1,13 +1,13 @@
-local Vector = Vector or require "lib/vector"
-local Actor = Actor or require "lib/actor"
-local Player = Player or require "src/player"
-local Enemy = Enemy or require "src/enemy"
-local Foco = Foco or require "src/foco"
-local Spawner = Spawner or require "spawner"
+Vector = Vector or require "lib/vector"
+Actor = Actor or require "lib/actor"
+Player = Player or require "src/player"
+Enemy = Enemy or require "src/enemy"
+Foco = Foco or require "src/foco"
+Spawner = Spawner or require "spawner"
 Food = Food or require "src/food"
 
 math.randomseed(os.time())
-
+local score = 0
 actorList = {}
 
 function love.load()
@@ -28,6 +28,9 @@ end
 function love.update(dt)
   for k, v in ipairs(actorList) do
     v:update(dt)
+    if v:is(Player) then
+      score = v.points
+    end
   end
 end
 

@@ -25,7 +25,16 @@ function Enemy:update(dt)
   self.forward=self.forward:normalized()
 
   if self:checkCollision(p) then
-    print("HAS PERDIDO")
+    if not p.canEatEnemy then
+      print("HAS PERDIDO")
+    else
+      -- WIN --
+      for k, v in ipairs(actorList) do
+        if v == self then 
+            table.remove(actorList, k) 
+        end 
+      end 
+    end
   end
   --Launching
 

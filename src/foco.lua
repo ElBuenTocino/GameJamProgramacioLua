@@ -23,7 +23,6 @@ function Foco:update(dt)
   if self.count == 8 then
     self.fixed = true
   end 
-   print(self.count)
   if not self.fixed then
     self:FlickeringLight(dt)
   else 

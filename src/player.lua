@@ -1,9 +1,9 @@
-local Actor = Actor or require "lib/actor"
-local Vector = Vector or require "lib/vector"
-local Foco = Foco or require "src/foco"
-local Food = Food or require "src/food"
+Actor = Actor or require "lib/actor"
+Vector = Vector or require "lib/vector"
+Foco = Foco or require "src/foco"
+Food = Food or require "src/food"
 local Player = Actor:extend()
-
+local e = nil
 
 function Player:new()
   Player.super.new(self, "src/mainVirus.png", 180, 540, 130, 0, 0)
@@ -11,8 +11,10 @@ function Player:new()
   self.baseHeight = self.height * 0.7
   self.scale = Vector(0.1, 0.1)
   self.points = 10
-
+  self.canEatEnemy = false
   self:setSize()
+
+  
 end
 
 
@@ -20,6 +22,12 @@ function Player:update(dt)
   Player.super.update(self, dt)
   self.XFor = 0
   self.YFor = 0
+
+  for k, v in ipairs(actorList) do
+    if v:is(Enemy) then
+      e = v
+    end
+  end
 
   if (love.keyboard.isDown("a")) then
     self.XFor = -1
@@ -48,7 +56,11 @@ function Player:update(dt)
   if (self.points <= 0) then
     self:die()
   end
-
+  if(self.baseWidth * 0.5 <= self.width) then
+    self.canEatEnemy = true
+  else
+    self.canEatEnemy = false
+  end
   self.forward = Vector(self.XFor, self.YFor)
 
 end
@@ -69,7 +81,9 @@ function Player:isInLight()
   for i = 1, #actorList, 1 do
     if (actorList[i]:is(Foco) and Vector.distance(actorList[i].position, self.position) <= 100) then
       print("isInLight")
-      return true
+      if(actorList[i].fixed) then
+        return true
+      end
     end
   end
   return false
@@ -108,7 +122,7 @@ end
 
 
 function Player:damageLight(dt)
-  self.points = self.points - 1 * dt
+  self.points = self.points - 1.5 * dt
   self:setSize()
 end
 
