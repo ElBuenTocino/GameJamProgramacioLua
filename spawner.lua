@@ -43,7 +43,7 @@ end
 
 function Spawner:checkNumFood()
   local num = 0
-  for k,v in pairs(actorList) then
+  for k,v in pairs(actorList) do
     if v:is(Food) then num = num + 1 end
   end
   return num
