@@ -4,20 +4,17 @@ local Player = Player or require "src/player"
 local Enemy = Enemy or require "src/enemy"
 local Foco = Foco or require "src/foco"
 local Spawner = Spawner or require "spawner"
+local Menu = Menu or require "src/menu"
 
 math.randomseed(os.time())
 
 actorList = {}
 
 function love.load()
-  local s = Player()
-  table.insert(actorList,s)
-  local e = Enemy()
-  table.insert(actorList,e)
-  -- local fo = Foco()
-  -- table.insert(actorList, fo)
-  local sp = Spawner(5, 2)
-  table.insert(actorList,sp)
+  local m = Menu("src/Menu.png")
+  table.insert(actorList,m)
+  
+  -- el resto esta dentro de Menu
 end
 
 function love.update(dt)
