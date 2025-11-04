@@ -6,13 +6,13 @@ local Player = Actor:extend()
 
 
 function Player:new()
-  Player.super.new(self, "src/mainVirus.png", 180, 540, 100, 0, 0)
+  Player.super.new(self, "src/mainVirus.png", 180, 540, 130, 0, 0)
   self.scale = Vector(0.1, 0.1)
   self.XFor = 0
   self.YFor = 0
   self.points = 1
-  self.width = self.width * self.scale.x
-  self.height= self.height * self.scale.y
+  self.width = self.width * self.scale.x * 0.7
+  self.height= self.height * self.scale.y * 0.7
   self.origin = Vector(self.origin.x - self.width*5, self.origin.y - self.height*5)
 end
 
@@ -53,6 +53,7 @@ function Player:update(dt)
   end
 
   self.forward = Vector(self.XFor, self.YFor)
+
 end
 
 function Player:draw()

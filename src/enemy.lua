@@ -6,10 +6,10 @@ local p = nil
 function Enemy:new()
   Enemy.super.new(self, "src/mainVirus.png", 100, 100, 50, 0, 0)
   self.scale = Vector(0.5, 0.5)
-  self.width = self.width * self.scale.x
-  self.height= self.height * self.scale.y
+  self.width = self.width * self.scale.x * 0.7
+  self.height = self.height * self.scale.y * 0.7
   self.origin = Vector(self.origin.x - self.width, self.origin.y - self.height)
-
+  self.radius = self.width/2
 end
 
 function Enemy:update(dt)

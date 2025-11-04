@@ -1,25 +1,28 @@
 Actor = Actor or require "lib/actor"
 Vector = Vector or require "lib/vector"
+Foco = Foco or require "src/foco"
+Food = Food or require "src/food"
 
 local Spawner = Actor:extend()
-
 
 function Spawner:new(_time, _objSpawner)
   self.tActual = 0
   self.tFinal = _time or 5
   self.loop = true
+  self.obj = _objSpawner
 end
 
 function Spawner:update(dt)
   self.tActual = self.tActual + dt
   if self.tActual > self.tFinal then
     self:trigger()
-    if _objSpawner == 1 then
+    if self.obj == 1 then
         local f = Food()
         table.insert(actorList, f)
-    elseif _objSpawner == 2 then
-        local e = Enemy()
+    elseif self.obj == 2 then
+        local e = Foco()
         table.insert(actorList, e)
+        print("foco")
     end 
     if self.loop then
       self.tActual = 0
