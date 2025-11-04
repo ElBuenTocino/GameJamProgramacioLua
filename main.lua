@@ -1,20 +1,23 @@
 local Vector = Vector or require "lib/vector"
 local Actor = Actor or require "lib/actor"
 local Player = Player or require "src/player"
+local Enemy = Enemy or require "src/enemy"
 local Foco = Foco or require "src/foco"
--- local Spawner = Spawner or require "src/spawner"
+local Spawner = Spawner or require "spawner"
 
 math.randomseed(os.time())
 
 actorList = {}
 
 function love.load()
-  local fo = Foco()
-  table.insert(actorList, fo)
-  --local s = Player()
-  --table.insert(actorList,s)
---   local sp = Spawner(true)
---   table.insert(actorList,sp)
+  local s = Player()
+  table.insert(actorList,s)
+  local e = Enemy()
+  table.insert(actorList,e)
+  -- local fo = Foco()
+  -- table.insert(actorList, fo)
+  local sp = Spawner(5, 2)
+  table.insert(actorList,sp)
 end
 
 function love.update(dt)
@@ -28,5 +31,4 @@ function love.draw()
   for k, v in ipairs(actorList) do
     v:draw()
   end
-
 end

@@ -3,7 +3,7 @@ local Vector = Vector or require "lib/vector"
 local Food = Actor:extend()
 
 function Food:new()
-  Food.super.new(self, "src/comida.png", 180, 540, 100, 0, 0)
+  Food.super.new(self, "src/comida.png", 0, 0, 100, 0, 0)
 end
 
 function Food:update(dt)
