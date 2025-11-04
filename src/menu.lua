@@ -49,8 +49,11 @@ function Menu:click(mouse) -- ver si el usuario esta clicando yupii
         table.insert(actorList,s)
         local e = Enemy()
         table.insert(actorList,e)
-        local sp = Spawner(5, 2)
-        table.insert(actorList,sp)
+        local spFoco = Spawner(5, 2)
+        table.insert(actorList,spFoco)
+        local spFood = Spawner(1, 1)
+        table.insert(actorList,spFood)
+
     end
 end
 

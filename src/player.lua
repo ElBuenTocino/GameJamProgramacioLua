@@ -5,16 +5,17 @@ Food = Food or require "src/food"
 local Player = Actor:extend()
 local e = nil
 
+local w, h = love.graphics.getDimensions()
+
 function Player:new()
-  Player.super.new(self, "src/mainVirus.png", 180, 540, 130, 0, 0)
+  Player.super.new(self, "src/Textura/virus.png", 180, 540, 130, 0, 0)
   self.baseWidth = self.width * 0.7
   self.baseHeight = self.height * 0.7
   self.scale = Vector(0.1, 0.1)
   self.points = 10
   self.canEatEnemy = false
+  self.origin = Vector(self.origin.x - self.width, self.origin.y - self.height)
   self:setSize()
-
-  
 end
 
 
@@ -29,19 +30,19 @@ function Player:update(dt)
     end
   end
 
-  if (love.keyboard.isDown("a")) then
+  if (love.keyboard.isDown("a") and self.position.x > 0 - self.width/2) then
     self.XFor = -1
   end
 
-  if (love.keyboard.isDown("d")) then
+  if (love.keyboard.isDown("d") and self.position.x < w - self.width/2) then
     self.XFor = 1
   end
 
-  if (love.keyboard.isDown("s")) then
+  if (love.keyboard.isDown("s") and self.position.y < h - self.height/2) then
     self.YFor = 1
   end
 
-  if(love.keyboard.isDown("w")) then
+  if(love.keyboard.isDown("w") and self.position.y > 0 - self.height/2) then
     self.YFor = -1
   end
 
@@ -122,7 +123,7 @@ end
 
 
 function Player:damageLight(dt)
-  self.points = self.points - 1.5 * dt
+  self.points = self.points - 2 * dt
   self:setSize()
 end
 

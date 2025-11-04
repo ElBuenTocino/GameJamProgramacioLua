@@ -4,10 +4,10 @@ Player = Player or require "src/player"
 local Enemy = Actor:extend()
 local p = nil
 function Enemy:new()
-  Enemy.super.new(self, "src/mainVirus.png", 100, 100, 50, 0, 0)
+  Enemy.super.new(self, "src/Textura/virus_malo.png", 100, 100, 50, 0, 0)
   self.scale = Vector(0.5, 0.5)
-  self.width = self.width * self.scale.x * 0.7
-  self.height = self.height * self.scale.y * 0.7
+  self.width = self.width * self.scale.x * 0.6
+  self.height = self.height * self.scale.y * 0.6
   self.origin = Vector(self.origin.x - self.width, self.origin.y - self.height)
   self.radius = self.width/2
 end
@@ -43,7 +43,6 @@ function Enemy:update(dt)
 end
 
 function Enemy:draw()
-  love.graphics.setColor(1,0,0.5)
   local xx = self.position.x
   local ox = self.origin.x
   local yy = self.position.y

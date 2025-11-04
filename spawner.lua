@@ -16,7 +16,7 @@ function Spawner:update(dt)
   self.tActual = self.tActual + dt
   if self.tActual > self.tFinal then
     self:trigger()
-    if self.obj == 1 then
+    if self.obj == 1 and self:checkNumFood() <= 20 then
         local f = Food()
         table.insert(actorList, f)
     elseif self.obj == 2 then
@@ -39,6 +39,15 @@ end
 
 function Spawner:trigger()
   print("hola")
+end
+
+function Spawner:checkNumFood()
+  local num = 0
+  for k,v in pairs(actorList) then
+    if v:is(Food) then num = num + 1 end
+  end
+  return num
+
 end
 
 function Spawner:draw()

@@ -14,17 +14,23 @@ function love.load()
   local m = Menu("src/Menu.png")
   table.insert(actorList,m)
   
+
+  local score = 0
   -- el resto esta dentro de Menu
 end
 
 function love.update(dt)
   for k, v in ipairs(actorList) do
     v:update(dt)
+    if v.points ~= nil then 
+      score = v.points
+      score = math.floor(score + 0.5)
+    end
   end
 end
 
 function love.draw()
-  love.graphics.print("Number astro eliminated: "..tostring(score),10,10)
+  love.graphics.print("Points: " .. tostring(score),10,10)
   for k, v in ipairs(actorList) do
     v:draw()
   end
