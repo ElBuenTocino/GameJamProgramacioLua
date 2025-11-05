@@ -15,9 +15,13 @@ function WinScreen:draw()
     love.graphics.draw(self.image, 0, 0)
     self:drawButtons(false)
 
-    love.graphics.print("YOU ATE THE VIRUS AND WON!!", 570, 300)
-    love.graphics.print("You got " .. tostring(score) .. " points", 570, 350)
-    love.graphics.print("And beat the game in " .. tostring(math.floor(time + 0.5)) .. " seconds!", 570, 400)
+    font = love.graphics.newFont(36)
+    love.graphics.setFont(font)
+    love.graphics.print("YOU ATE THE VIRUS AND WON!!", 200, 150)
+    love.graphics.print("You got " .. tostring(score) .. " points", 350, 250)
+    love.graphics.print("And beat the game in " .. tostring(math.floor(time + 0.5)) .. " seconds!", 200, 350)
+    font = love.graphics.newFont(24)
+    love.graphics.setFont(font)
 end
 
 function WinScreen:update(dt)

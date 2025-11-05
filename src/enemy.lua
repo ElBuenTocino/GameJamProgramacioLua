@@ -48,7 +48,6 @@ function Enemy:update(dt)
   --collision player
   if self:checkCollision(p) then
     if not p.canEatEnemy then
-      print("HAS PERDIDO")
     else
       love.audio.play(sounds.enemySound)
       WinScreenAppear()

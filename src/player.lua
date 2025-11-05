@@ -85,7 +85,7 @@ end
 function Player:isInLight()
   for i = 1, #actorList, 1 do
     if (actorList[i]:is(Foco) and Vector.distance(actorList[i].position, self.position) <= 100) then
-      print("isInLight")
+      -- print("isInLight")
       if(actorList[i].fixed) then
         return true
       end
@@ -130,13 +130,13 @@ end
 
 
 function Player:damageLight(dt)
-  self.points = self.points - 4 * dt
+  self.points = self.points - 5 * dt
   love.audio.play(sounds.hurtSound)
   self:setSize()
 end
 
 function Player:die()
-  print("playerdie")
+  -- print("playerdie")
   LoseScreenAppear()
 end
 

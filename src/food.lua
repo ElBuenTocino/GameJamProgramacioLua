@@ -18,7 +18,7 @@ local numAlea = 0
 
 function Food:new()
   numAlea = love.math.random(1,100)
-  print(numAlea)
+  -- print(numAlea)
   if (numAlea >= 1 and numAlea < 60) then
     self.pointsGained = 1
     self.sprite = foodsprites[math.random(1, 2)]
