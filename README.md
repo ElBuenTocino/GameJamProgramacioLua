@@ -1,2 +1,0 @@
-# GameJamProgramacioLua
-virus
