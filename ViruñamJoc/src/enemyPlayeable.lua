@@ -8,7 +8,7 @@ local changeDir = false
 local w,h = love.graphics.getDimensions()
 
 function EnemyPlayeable:new()
-  EnemyPlayeable.super.new(self, "src/Textura/virus_malo.png", 500, 100, 50, 0, 0)
+  EnemyPlayeable.super.new(self, "src/Textura/virus_malo.png", 500, 100, 60, 0, 0)
   self.scale = Vector(0.5, 0.5)
   self.width = self.width * self.scale.x * 0.6
   self.height = self.height * self.scale.y * 0.6
@@ -26,6 +26,7 @@ function EnemyPlayeable:update(dt)
     end
   end
   -- control
+  self.forward = Vector( 0, 0)
   if (love.keyboard.isDown("left") and self.position.x > 0 - self.width/2) then
     self.forward.x = -1 
   end
