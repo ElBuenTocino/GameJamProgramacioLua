@@ -14,17 +14,32 @@ local foodsprites = {
   "src/Textura/06.png"
 }
 
-local scale = 0.7
+local numAlea = 0
 
 function Food:new()
-  local sprite = foodsprites[math.random(1, #foodsprites)]
+  numAlea = love.math.random(1,100)
+  print(numAlea)
+  if (numAlea >= 1 and numAlea < 60) then
+    self.pointsGained = 1
+    self.sprite = foodsprites[math.random(1, 3)]
+    self.scale_ = 0.7
+  elseif (numAlea >= 60 and numAlea < 90) then
+    self.pointsGained = 2
+    self.sprite = foodsprites[math.random(3, 5)]
+    self.scale_ = 1
+  else
+    self.pointsGained = 3
+    self.sprite = foodsprites[math.random(5, 7)]
+    self.scale_ = 1.2
+  end
   local x = love.math.random(0, w)
   local y = love.math.random(0, h)
-  Food.super.new(self, sprite, x, y, 0)
-  self.scale = Vector(scale, scale)
+  Food.super.new(self, self.sprite, x, y, 0)
+  self.scale = Vector(self.scale_, self.scale_)
   self.width  = self.image:getWidth()  * self.scale.x
   self.height = self.image:getHeight() * self.scale.y
   self.origin = Vector(self.width / 2, self.height / 2)
+  
 end
 
 function Food:update(dt)

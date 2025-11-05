@@ -2,6 +2,7 @@ Actor = Actor or require "lib/actor"
 Enemy = Enemy or require "src/enemy"
 Player = Player or require "src/player"
 Spawner = Spawner or require "spawner"
+Sounds = Sounds or require "src/sounds"
 Menu = Actor:extend()
 
 function Menu:new(image)
@@ -9,6 +10,7 @@ function Menu:new(image)
     self.image = love.graphics.newImage(image)
     self.startButton = {x = 450, y = 450, w = 100, h = 30}
     self.exitButton  = {x = 450,  y = 500,  w = 100, h = 30}
+    love.audio.play(sounds.menuMusic)
 end
 
 function Menu:draw()
@@ -33,18 +35,19 @@ end
 
 function Menu:click(mouse) -- ver si el usuario esta clicando yupii  
     x, y = love.mouse.getPosition( )
-
+    
     if love.mouse.isDown(1) and self:clickedStart(x,y) then
         
         for i = 1, #actorList, 1 do
             if (actorList[i] ~= nil) then
                 if (actorList[i]:is(Menu)) then
                     table.remove(actorList, i)
-      
+                    
                 end
             end
         end
-
+        love.audio.stop(sounds.menuMusic)
+        love.audio.play(sounds.mainMusic)
         local s = Player()
         table.insert(actorList,s)
         local e = Enemy()
