@@ -8,7 +8,7 @@ local changeDir = false
 local w,h = love.graphics.getDimensions()
 
 function Enemy:new()
-  Enemy.super.new(self, "src/Textura/virus_malo.png", 100, 100, 50, 0, 0)
+  Enemy.super.new(self, "src/Textura/virus_malo.png", 500, 100, 50, 0, 0)
   self.scale = Vector(0.5, 0.5)
   self.width = self.width * self.scale.x * 0.6
   self.height = self.height * self.scale.y * 0.6
@@ -48,6 +48,7 @@ function Enemy:update(dt)
   --collision player
   if self:checkCollision(p) then
     if not p.canEatEnemy then
+      p.points = 0
     else
       love.audio.play(sounds.enemySound)
       WinScreenAppear()
@@ -76,9 +77,7 @@ function Enemy:draw()
     love.graphics.setColor(1,1,1);
   end
   love.graphics.draw(self.image, xx, yy, rr, self.scale.x, self.scale.y, ox, oy)
-  love.graphics.setColor(0,1,0)
-  love.graphics.rectangle("line", xx, yy, self.width, self.height)
-  love.graphics.setColor(1,1,1)
+
 end
 
 return Enemy

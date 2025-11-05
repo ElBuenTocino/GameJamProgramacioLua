@@ -76,8 +76,6 @@ function Player:draw()
   local yy = self.position.y
   local oy = self.origin.y
   local rr = self.rot
-  love.graphics.setColor(0,1,0)
-  love.graphics.rectangle("line", xx, yy, self.width, self.height)
   love.graphics.setColor(1,1,1)
   love.graphics.draw(self.image, xx, yy, rr, self.scale.x, self.scale.y, ox, oy)
 end
@@ -130,7 +128,7 @@ end
 
 
 function Player:damageLight(dt)
-  self.points = self.points - 5 * dt
+  self.points = self.points - 10 * dt
   love.audio.play(sounds.hurtSound)
   self:setSize()
 end
