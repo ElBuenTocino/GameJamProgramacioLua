@@ -2,6 +2,7 @@ Actor = Actor or require "lib/actor"
 Vector = Vector or require "lib/vector"
 Foco = Foco or require "src/foco"
 Food = Food or require "src/food"
+Sounds = Sounds or require "src/sounds"
 local Player = Actor:extend()
 local e = nil
 
@@ -103,6 +104,7 @@ function Player:isTouchingFood()
 end
 
 function Player:eat()
+  love.audio.play(sounds.eatSound)
   self.points = self.points + 1
   self:setSize()
 end
