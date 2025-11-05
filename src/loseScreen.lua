@@ -14,7 +14,11 @@ end
 function LoseScreen:draw()
     love.graphics.draw(self.image, 0, 0)
     self:drawButtons(false)
-    love.graphics.print("YOU GOT CONSUMED AND LOST...", 570, 300)
+    font = love.graphics.newFont(50)
+    love.graphics.setFont(font)
+    love.graphics.print("YOU GOT CONSUMED AND LOST...", 75, 300)
+    font = love.graphics.newFont(24)
+    love.graphics.setFont(font)
 end
 
 function LoseScreen:update(dt)

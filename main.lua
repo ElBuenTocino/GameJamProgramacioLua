@@ -12,6 +12,8 @@ math.randomseed(os.time())
 
 actorList = {}
 time = 0
+local timerstop = false
+local boolEnd = true
 
 function love.load()
   local m = Menu("src/Textura/fondoMenu.jpg")
@@ -29,7 +31,9 @@ function love.update(dt)
       score = math.floor(score + 0.5)
     end
   end
+  if (not timerstop) then
   time = time + dt
+  end
 end
 
 function love.draw()
@@ -41,18 +45,26 @@ end
 
 function EmptyActorList()
   for i = 1, #actorList, 1 do
-    table.remove(actorList, i)
+    actorList[i] = nil
   end
 end
 
-function WinScreen()
-  EmptyActorList()
-  wscr = WinScreen()
-  table.insert(actorList, wscr)
+function WinScreenAppear()
+  if (boolEnd) then
+    timerstop = true
+    EmptyActorList()
+    wscr = WinScreen("src/Textura/Menu.png")
+    table.insert(actorList, wscr)
+    boolEnd = false
+  end
 end
 
-function LoseScreen()
-  EmptyActorList()
-  lscr = LoseScreen()
-  table.insert(actorList, lscr)
+function LoseScreenAppear()
+  if (boolEnd) then
+    timerstop = true
+    EmptyActorList()
+    lscr = LoseScreen("src/Textura/Menu.png")
+    table.insert(actorList, lscr)
+    boolEnd = false
+  end
 end

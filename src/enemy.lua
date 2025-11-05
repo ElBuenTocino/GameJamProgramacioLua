@@ -45,7 +45,7 @@ function Enemy:update(dt)
     if not p.canEatEnemy then
       print("HAS PERDIDO")
     else
-      -- WIN --
+      WinScreenAppear()
       for k, v in ipairs(actorList) do
         if v == self then 
             table.remove(actorList, k) 

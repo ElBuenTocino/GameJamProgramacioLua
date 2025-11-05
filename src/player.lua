@@ -107,7 +107,7 @@ end
 
 function Player:eat()
   love.audio.play(sounds.eatSound)
-  self.points = self.points + -2
+  self.points = self.points + -5
   self:setSize()
 end
 
@@ -134,13 +134,7 @@ end
 
 function Player:die()
   print("playerdie")
-  for i = 1, #actorList, 1 do
-    if (actorList[i] ~= nil) then
-      if (actorList[i]:is(Player)) then
-        table.remove(actorList, i)
-      end
-    end
-  end
+  LoseScreenAppear()
 end
 
 return Player
