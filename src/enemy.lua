@@ -48,7 +48,7 @@ function Enemy:update(dt)
   --collision player
   if self:checkCollision(p) then
     if not p.canEatEnemy then
-      print("HAS PERDIDO")
+      p.points = 0
     else
       love.audio.play(sounds.enemySound)
       WinScreenAppear()
@@ -77,9 +77,6 @@ function Enemy:draw()
     love.graphics.setColor(1,1,1);
   end
   love.graphics.draw(self.image, xx, yy, rr, self.scale.x, self.scale.y, ox, oy)
-  love.graphics.setColor(0,1,0)
-  love.graphics.rectangle("line", xx, yy, self.width, self.height)
-  love.graphics.setColor(1,1,1)
 end
 
 return Enemy
