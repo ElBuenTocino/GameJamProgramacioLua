@@ -53,7 +53,7 @@ function WinScreenAppear()
   if (boolEnd) then
     timerstop = true
     EmptyActorList()
-    wscr = WinScreen("src/Textura/Menu.png")
+    wscr = WinScreen("src/Textura/fondo.jpeg")
     table.insert(actorList, wscr)
     boolEnd = false
   end
@@ -63,7 +63,7 @@ function LoseScreenAppear()
   if (boolEnd) then
     timerstop = true
     EmptyActorList()
-    lscr = LoseScreen("src/Textura/Menu.png")
+    lscr = LoseScreen("src/Textura/fondo.jpeg")
     table.insert(actorList, lscr)
     boolEnd = false
   end

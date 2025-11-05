@@ -7,6 +7,7 @@ local Player = Actor:extend()
 local e = nil
 
 local w, h = love.graphics.getDimensions()
+local pointsToGive = 0
 
 function Player:new()
   Player.super.new(self, "src/Textura/virus.png", 180, 540, 130, 0, 0)
@@ -97,6 +98,7 @@ function Player:isTouchingFood()
   for i = 1, #actorList, 1 do
     if (actorList[i] ~= nil) then
       if (actorList[i]:is(Food) and self:checkCollision(actorList[i])) then
+        pointsToGive = actorList[i].pointsGained
         table.remove(actorList, i)
         return true
       end
@@ -107,7 +109,8 @@ end
 
 function Player:eat()
   love.audio.play(sounds.eatSound)
-  self.points = self.points + -5
+  self.points = self.points + pointsToGive
+  pointsToGive = 0
   self:setSize()
 end
 
@@ -127,7 +130,7 @@ end
 
 
 function Player:damageLight(dt)
-  self.points = self.points - 2 * dt
+  self.points = self.points - 4 * dt
   love.audio.play(sounds.hurtSound)
   self:setSize()
 end

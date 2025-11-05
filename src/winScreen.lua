@@ -16,8 +16,8 @@ function WinScreen:draw()
     self:drawButtons(false)
 
     love.graphics.print("YOU ATE THE VIRUS AND WON!!", 570, 300)
-    love.graphics.print("You got " .. tostring(score) .. " points", 530, 350)
-    love.graphics.print("And beat the game in " .. tostring(math.floor(time + 0.5)) .. " seconds!", 490, 350)
+    love.graphics.print("You got " .. tostring(score) .. " points", 570, 350)
+    love.graphics.print("And beat the game in " .. tostring(math.floor(time + 0.5)) .. " seconds!", 570, 400)
 end
 
 function WinScreen:update(dt)
