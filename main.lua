@@ -1,21 +1,23 @@
-local Vector = Vector or require "lib/vector"
-local Actor = Actor or require "lib/actor"
-local Player = Player or require "src/player"
-local Enemy = Enemy or require "src/enemy"
-local Foco = Foco or require "src/foco"
-local Spawner = Spawner or require "spawner"
-local Menu = Menu or require "src/menu"
+Vector = Vector or require "lib/vector"
+Actor = Actor or require "lib/actor"
+Player = Player or require "src/player"
+Enemy = Enemy or require "src/enemy"
+Foco = Foco or require "src/foco"
+Spawner = Spawner or require "spawner"
+Menu = Menu or require "src/menu"
+WinScreen = WinScreen or require "src/winScreen"
+LoseScreen = LoseScreen or require "src/loseScreen"
 
 math.randomseed(os.time())
 
 actorList = {}
+time = 0
 
 function love.load()
-  local m = Menu("src/Menu.png")
-  table.insert(actorList,m)
-  
+  local m = Menu("src/Textura/fondoMenu.jpg")
+  table.insert(actorList,m)  
 
-  local score = 0
+  score = 0
   -- el resto esta dentro de Menu
 end
 
@@ -27,6 +29,7 @@ function love.update(dt)
       score = math.floor(score + 0.5)
     end
   end
+  time = time + dt
 end
 
 function love.draw()
@@ -34,4 +37,22 @@ function love.draw()
   for k, v in ipairs(actorList) do
     v:draw()
   end
+end
+
+function EmptyActorList()
+  for i = 1, #actorList, 1 do
+    table.remove(actorList, i)
+  end
+end
+
+function WinScreen()
+  EmptyActorList()
+  wscr = WinScreen()
+  table.insert(actorList, wscr)
+end
+
+function LoseScreen()
+  EmptyActorList()
+  lscr = LoseScreen()
+  table.insert(actorList, lscr)
 end
