@@ -12,6 +12,7 @@ math.randomseed(os.time())
 
 actorList = {}
 time = 0
+local timerFoco = 0
 local timerstop = false
 local boolEnd = true
 
@@ -31,9 +32,17 @@ function love.update(dt)
       score = math.floor(score + 0.5)
     end
   end
+  
   if (not timerstop) then
   time = time + dt
+  timerFoco = timerFoco + dt
   end
+  if(timerFoco > 20) then
+    sp = Spawner(5, 2)
+    table.insert(actorList, sp)
+    timerFoco = 0
+  end
+
 end
 
 function love.draw()
