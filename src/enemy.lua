@@ -1,6 +1,7 @@
 Actor = Actor or require "lib/actor"
 Vector = Vector or require "lib/vector"
 Player = Player or require "src/player"
+Sounds = Sounds or require "src/sounds"
 local Enemy = Actor:extend()
 local p = nil
 local changeDir = false
@@ -18,13 +19,14 @@ end
 function Enemy:update(dt)
   Enemy.super.update(self, dt)
   -- Movement
-  
+  -- get player
   for k, v in ipairs(actorList) do
     if v:is(Player) then
      p = v
     end
   end
 
+  --tocar paredes
   if(self.position.x <= 0 or self.position.x >= w) then
     self.forward.x = 0
   end
@@ -32,6 +34,7 @@ function Enemy:update(dt)
     self.forward.y = 0
   end
 
+  --change dir
   if not p.canEatEnemy then
     self.forward = (p.position - self.position)
     self.forward=self.forward:normalized()
@@ -41,10 +44,13 @@ function Enemy:update(dt)
       changeDir = true
     end
   end
+
+  --collision player
   if self:checkCollision(p) then
     if not p.canEatEnemy then
       print("HAS PERDIDO")
     else
+      love.audio.play(sounds.enemySound)
       WinScreenAppear()
       for k, v in ipairs(actorList) do
         if v == self then 

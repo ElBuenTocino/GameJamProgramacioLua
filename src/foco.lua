@@ -63,7 +63,7 @@ end
 
 function Foco:Fix(dt)
      self.timer = self.timer + dt 
-     self.alfa = 0.5
+     self.alfa = 0.7
 
      if self.timer > 4 then 
         for k, v in ipairs(actorList) do

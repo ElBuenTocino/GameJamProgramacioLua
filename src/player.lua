@@ -107,7 +107,7 @@ end
 
 function Player:eat()
   love.audio.play(sounds.eatSound)
-  self.points = self.points + -5
+  self.points = self.points + 5
   self:setSize()
 end
 
