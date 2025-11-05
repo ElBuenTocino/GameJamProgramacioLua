@@ -27,7 +27,7 @@ function EnemyPlayeable:update(dt)
   end
   -- control
   if (love.keyboard.isDown("left") and self.position.x > 0 - self.width/2) then
-    self.forward.x = -1
+    self.forward.x = -1 
   end
 
   if (love.keyboard.isDown("right") and self.position.x < w - self.width/2) then
