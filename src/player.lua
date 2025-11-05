@@ -56,15 +56,17 @@ function Player:update(dt)
   end
 
   if (self.points <= 0) then
+    love.audio.play(sounds.dieSound)
     self:die()
   end
+
   if(self.baseWidth * 0.5 <= self.width) then
     self.canEatEnemy = true
   else
     self.canEatEnemy = false
   end
   self.forward = Vector(self.XFor, self.YFor)
-
+  self.forward:normalized()
 end
 
 function Player:draw()
@@ -105,7 +107,7 @@ end
 
 function Player:eat()
   love.audio.play(sounds.eatSound)
-  self.points = self.points + 1
+  self.points = self.points + -2
   self:setSize()
 end
 
@@ -126,6 +128,7 @@ end
 
 function Player:damageLight(dt)
   self.points = self.points - 2 * dt
+  love.audio.play(sounds.hurtSound)
   self:setSize()
 end
 

@@ -3,6 +3,9 @@ Vector = Vector or require "lib/vector"
 Player = Player or require "src/player"
 local Enemy = Actor:extend()
 local p = nil
+local changeDir = false
+local w,h = love.graphics.getDimensions()
+
 function Enemy:new()
   Enemy.super.new(self, "src/Textura/virus_malo.png", 100, 100, 50, 0, 0)
   self.scale = Vector(0.5, 0.5)
@@ -21,9 +24,23 @@ function Enemy:update(dt)
      p = v
     end
   end
-  self.forward = (p.position - self.position)
-  self.forward=self.forward:normalized()
 
+  if(self.position.x <= 0 or self.position.x >= w) then
+    self.forward.x = 0
+  end
+  if(self.position.y <= 0 or self.position.y >= h) then
+    self.forward.y = 0
+  end
+
+  if not p.canEatEnemy then
+    self.forward = (p.position - self.position)
+    self.forward=self.forward:normalized()
+  else
+    if not changeDir then
+      self.forward = self.forward * -1
+      changeDir = true
+    end
+  end
   if self:checkCollision(p) then
     if not p.canEatEnemy then
       print("HAS PERDIDO")
@@ -48,6 +65,11 @@ function Enemy:draw()
   local yy = self.position.y
   local oy = self.origin.y
   local rr = self.rot
+  if p.canEatEnemy then
+    love.graphics.setColor(0.2,1,1);
+  else
+    love.graphics.setColor(1,1,1);
+  end
   love.graphics.draw(self.image, xx, yy, rr, self.scale.x, self.scale.y, ox, oy)
   love.graphics.setColor(0,1,0)
   love.graphics.rectangle("line", xx, yy, self.width, self.height)
