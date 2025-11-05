@@ -57,16 +57,6 @@ function Food:draw()
     self.origin.x,
     self.origin.y
   )
-
-  love.graphics.setColor(0, 1, 0)
-  love.graphics.rectangle(
-    "line",
-    self.position.x - self.origin.x,
-    self.position.y - self.origin.y,
-    self.width,
-    self.height
-  )
-  love.graphics.setColor(1, 1, 1)
 end
 
 return Food
