@@ -22,7 +22,6 @@ function Spawner:update(dt)
     elseif self.obj == 2 then
         local e = Foco()
         table.insert(actorList, e)
-        print("foco")
     end 
     if self.loop then
       self.tActual = 0
@@ -38,7 +37,6 @@ function Spawner:update(dt)
 end
 
 function Spawner:trigger()
-  print("hola")
 end
 
 function Spawner:checkNumFood()

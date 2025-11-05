@@ -76,8 +76,6 @@ function Player:draw()
   local yy = self.position.y
   local oy = self.origin.y
   local rr = self.rot
-  love.graphics.setColor(0,1,0)
-  love.graphics.rectangle("line", xx, yy, self.width, self.height)
   love.graphics.setColor(1,1,1)
   love.graphics.draw(self.image, xx, yy, rr, self.scale.x, self.scale.y, ox, oy)
 end
@@ -85,7 +83,7 @@ end
 function Player:isInLight()
   for i = 1, #actorList, 1 do
     if (actorList[i]:is(Foco) and Vector.distance(actorList[i].position, self.position) <= 100) then
-      print("isInLight")
+      -- print("isInLight")
       if(actorList[i].fixed) then
         return true
       end
@@ -130,13 +128,13 @@ end
 
 
 function Player:damageLight(dt)
-  self.points = self.points - 4 * dt
+  self.points = self.points - 10 * dt
   love.audio.play(sounds.hurtSound)
   self:setSize()
 end
 
 function Player:die()
-  print("playerdie")
+  -- print("playerdie")
   LoseScreenAppear()
 end
 
